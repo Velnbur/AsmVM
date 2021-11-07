@@ -1,41 +1,51 @@
 package main
 
 import (
-    "os"
-    "log"
     "bufio"
-    "github.com/Velnbur/AsmVM/machine"
+    "fmt"
+    "github.com/Velnbur/AsmVM/src/machine"
+    "log"
+    "os"
 )
 
 func ParseSrc(path string) []string {
     var lines []string
+
     srcFile, err := os.Open(path)
     if err != nil {
         log.Fatal(err)
     }
-
     defer srcFile.Close()
 
     scanner := bufio.NewScanner(srcFile)
     for scanner.Scan() {
-        lines = append(lines, scanner.Text())
+        var tmp string
+        tmp = scanner.Text()
+        if tmp == "" {
+            continue
+        }
+        lines = append(lines, tmp)
     }
 
     if err := scanner.Err(); err != nil {
         log.Fatal(err)
     }
+
     return lines
 }
 
 func startMachine(lines []string) {
-    machine := machine.New()
+    mach := machine.New()
 
     for _, line := range lines {
-        err := machine.HandleCommand(line)
+        mach.SetCommand(line)
+        mach.PrintStatus()
+        err := mach.HandleCommand()
         if err != nil {
             log.Fatal(err.Error())
         }
-        machine.PrintStatus()
+        mach.PrintStatus()
+        fmt.Println()
     }
 }
 

@@ -8,7 +8,7 @@ func TestRegisterSetError(t *testing.T) {
 	reg := New()
 	err := reg.Set(Size, 0)
 	if err == nil {
-		t.Fatal("Must return error if pos is too greate")
+		t.Fatal("Must return error if pos is too great")
 	}
 }
 
@@ -16,7 +16,7 @@ func TestRegisterGetError(t *testing.T) {
 	reg := New()
 	_, err := reg.Get(Size)
 	if err == nil {
-		t.Fatal("Must return error if pos is too greate")
+		t.Fatal("Must return error if pos is too great")
 	}
 }
 
