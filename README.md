@@ -16,7 +16,7 @@ register - `R1`. You can use `example.iasm` as a remainder
 
 ## Build and Install
 Clone repository:
-> git clone TODO
+> git clone git@github.com:Velnbur/AsmVM.git
 
 Go to src dir:
 > cd AsmVM/src/
