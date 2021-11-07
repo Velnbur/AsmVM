@@ -85,15 +85,24 @@ func (m *state) SetCommand(line string) error {
 
 func (m state) PrintStatus() {
 	fmt.Printf("IR: %s\n", m.command)
-	for i, register := range m.registers {
+	for l, register := range m.registers {
 		s := register.ToSlice()
 		for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
 			s[i], s[j] = s[j], s[i]
 		}
-		fmt.Printf("R%d: %v\n", i+1, s)
+		fmt.Printf("R%d: ", l+1)
+		for i := 0; i < len(s); i++ {
+			fmt.Print(s[i])
+		}
+		fmt.Println()
 	}
-	fmt.Printf("PS: %t\n", m.sign)
-	fmt.Printf("PC: %d\n", m.commCounter)
+	fmt.Print("PS: ")
+	if m.sign {
+		fmt.Print("1")
+	} else {
+		fmt.Print("0")
+	}
+	fmt.Printf("\nPC: %d\n", m.commCounter)
 	fmt.Printf("TC: %d\n", m.tactsCounter)
 }
 
@@ -212,5 +221,10 @@ func (m *state) sub() {
 		m.sign = true
 	}
 
-	m.registers[0].Change(result)
+	for _, register := range m.registers {
+		if register == m.operand1 {
+			register.Change(result)
+			break
+		}
+	}
 }

@@ -38,9 +38,12 @@ func startMachine(lines []string) {
     mach := machine.New()
 
     for _, line := range lines {
-        mach.SetCommand(line)
+        err := mach.SetCommand(line)
+        if err != nil {
+            log.Fatal(err.Error())
+        }
         mach.PrintStatus()
-        err := mach.HandleCommand()
+        err = mach.HandleCommand()
         if err != nil {
             log.Fatal(err.Error())
         }
