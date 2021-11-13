@@ -48,7 +48,7 @@ type state struct {
 	sign         bool // result was less than zero if true
 	command     string
 	operator    Operator
-	operand1    token.Token
+	operand1 token.Token
 	operand2 token.Token
 }
 
@@ -98,11 +98,11 @@ func (m state) PrintStatus() {
 	}
 	fmt.Print("PS: ")
 	if m.sign {
-		fmt.Print("1")
+		fmt.Print("-\n")
 	} else {
-		fmt.Print("0")
+		fmt.Print("+\n")
 	}
-	fmt.Printf("\nPC: %d\n", m.commCounter)
+	fmt.Printf("PC: %d\n", m.commCounter)
 	fmt.Printf("TC: %d\n", m.tactsCounter)
 }
 
@@ -186,7 +186,6 @@ func (m *state) clean() {
 	m.operator = NONE
 	m.operand1 = nil
 	m.operand2 = nil
-	m.sign = false
 	m.command = ""
 }
 
@@ -211,6 +210,11 @@ func (m *state) mov() {
 	switch m.operand1.(type) {
 	case reg.Register:
 		m.operand1.Change(m.operand2.Value())
+		if m.operand2.Value() < 0 {
+			m.sign = true
+		} else {
+			m.sign = false
+		}
 	}
 }
 
@@ -219,6 +223,8 @@ func (m *state) sub() {
 	result := m.operand1.Value() - m.operand2.Value()
 	if result < 0 {
 		m.sign = true
+	} else {
+		m.sign = false
 	}
 
 	for _, register := range m.registers {

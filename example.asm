@@ -1,6 +1,5 @@
 mov R3, -2
-mov R2, 1
-sub R3, R2
+sub R3, 3
 
 mov R5, 3
 mov R4, R5

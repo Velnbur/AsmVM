@@ -8,7 +8,7 @@ for manipulating them `mov` and `sub`.
 
 For example, `mov R2, 2` will save `2` in `R2` register. And `sub R3, 1`
 will subtract value in `R3` and `1`. Result of `sub` saves in accumulator
-register - `R1`. You can use `example.iasm` as a remainder
+register - `R1`. You can use `example.asm` as a remainder
 
 ## Prerequisites
 
