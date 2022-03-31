@@ -16,14 +16,21 @@ register - `R1`. You can use `example.asm` as a remainder
 
 ## Build and Install
 Clone repository:
-> git clone git@github.com:Velnbur/AsmVM.git
+```shell
+$ git clone git@github.com:Velnbur/AsmVM.git
+```
 
 Go to src dir:
-> cd AsmVM/src/
+```shell
+$ cd AsmVM/src/
+```
 
 Build:
-> go build -o iasm
+```shell
+$ go build -o iasm
+```
 
 Use:
-> ./iasm <path_to_file>
-
+```shell
+$ ./iasm <path_to_file>
+```
